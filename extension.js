@@ -14,6 +14,7 @@ function activate(context) {
 		let deleteLine = config.get("deleteLineOnNoSeletion");
 		let emptyLine = config.get("emptyLineOnNoSeletion");
 		let deleteWordUnderTheCaret = config.get("deleteWordUnderTheCaret");
+		let trimLeft = config.get("trimLeft")
 		let trimRight = config.get("trimRight");
 
 		if (editor) {
@@ -41,17 +42,72 @@ function activate(context) {
 
 						console.log(`Deleted line: ${editor.document.getText(currentLineRange)}`);
 					}
-					// else if (deleteWordUnderTheCaret){
+					else if (deleteWordUnderTheCaret){
 
-					// 	const word = editor.document.getWordRangeAtPosition(selection.start);
+						const word = editor.document.getWordRangeAtPosition(selection.start);
 
-					// 	editBuilder.delete(word);
+						editBuilder.delete(word);
 
-					// 	console.log(`Deleted: ${editor.document.getText(wordRange)}`);
-					// }
-					// else if (deleteWordUnderTheCaret && trimLeft) {
-					// 	// if leave one space, just -1 from the spaces range
-					// }
+						console.log(`Deleted: ${editor.document.getText(word)}`);
+					}
+					else if (deleteWordUnderTheCaret || trimLeft) {
+
+						let currentRange = editor.document.getWordRangeAtPosition(selection.start);
+
+						if (currentRange == undefined){
+							console.log(`Undefined. Escaped`)
+							return;
+						}
+
+						let wordStart = new vscode.Position(currentRange.end.line, currentRange.start.character);
+
+						if (wordStart.character == 0) {
+							console.log(`Character was: ${wordStart.character}. Beginning of line. Escaped`)
+							return;
+						}
+
+						let wordStartWithUnderstep = new vscode.Position(currentRange.end.line, (currentRange.start.character - 1));
+						let previousCharacterRange = new vscode.Range(wordStartWithUnderstep, wordStart);
+						let previousCharacter = editor.document.getText(previousCharacterRange);
+
+						let numberOfSpaces = 0;
+
+						while (previousCharacter === " ") {
+
+							numberOfSpaces++;
+
+							let head = wordStart.character - 1;
+
+							if (head == 0) { // if head not zero
+								console.log(`Character was: ${head}. Escaped`)
+								break;
+							}
+
+							wordStart = new vscode.Position(currentRange.end.line, head);
+							wordStartWithUnderstep = new vscode.Position(currentRange.end.line, head - 1);
+
+							nextCharacterRange = new vscode.Range(wordStartWithUnderstep, wordStart);
+							previousCharacter = editor.document.getText(nextCharacterRange);
+						}
+
+						console.log(`Number of empty that will be deleted: ${numberOfSpaces}`);
+
+						let finalEndPosition = new vscode.Position(currentRange.end.line, (currentRange.end.character));
+
+						let leaveOneSpace = true;
+						if (leaveOneSpace) {
+							numberOfSpaces -= 1;
+							console.log(`leaveOneSpace = ${leaveOneSpace}. Number of empty that will be deleted: ${numberOfSpaces}`)
+						}
+
+						let finalStartPosition = new vscode.Position(currentRange.end.line, (currentRange.start.character) - numberOfSpaces);
+
+						let deletionWithTrimRange = new vscode.Range(finalStartPosition, finalEndPosition);
+
+						console.log(`Deleted: ${editor.document.getText(deletionWithTrimRange)} (${numberOfSpaces} spaces)`);
+
+						editBuilder.delete(deletionWithTrimRange);
+					}
 					else if (deleteWordUnderTheCaret && trimRight) {
 
 						let currentRange = editor.document.getWordRangeAtPosition(selection.start);
@@ -84,10 +140,10 @@ function activate(context) {
 						let finalStartPosition = new vscode.Position(currentRange.end.line, (currentRange.start.character));
 
 						let leaveOneSpace = false;
-						if (leaveOneSpace){
+						if (leaveOneSpace) {
 							numberOfSpaces -= 1;
 						}
-						
+
 						let finalEndPosition = new vscode.Position(currentRange.end.line, (currentRange.end.character) + numberOfSpaces);
 
 						let deletionWithTrimRange = new vscode.Range(finalStartPosition, finalEndPosition);

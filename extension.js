@@ -4,12 +4,15 @@ const vscode = require('vscode');
  * @param {vscode.ExtensionContext} context
  */
 
-const CONFIG = vscode.workspace.getConfiguration('cutcopypastedelete');
-const DELETE_LINE_ON_NO_SELECTION = CONFIG.get("deleteLineOnNoSeletion");
-const EMPTY_LINE = CONFIG.get("emptyLineOnNoSeletion");
-const DELETE_WORD_UNDER_THE_CARET = CONFIG.get("deleteWordUnderTheCaret");
-const TRIM_LEFT = CONFIG.get("trimLeft")
-const TRIM_RIGHT = CONFIG.get("trimRight");
+var config = vscode.workspace.getConfiguration('cutcopypastedelete');
+const DELETE_WORD_UNDER_THE_CARET = config.get("deleteWordUnderTheCaret.enabled")
+const DELETE_LINE_WHEN_CARET_AT_EOLC = config.get("deleteWordUnderTheCaret.deleteLineWhenCaretAtEndOfLineCharacter.enabled");
+const DELETE_LINE_IF_NO_SELECTION = config.get("deleteLineIfNoSeletion.enabled");
+const EMPTY_LINE = config.get("deleteLineIfNoSeletion.emptyLine.enabled");
+const TRIM_LEFT = config.get("trim.left.enabled")
+const TRIM_TO_ONE_SPACE_LEFT = config.get("trim.left.leaveOneSpace");
+const TRIM_RIGHT = config.get("trim.right.enabled");
+const TRIM_TO_ONE_SPACE_RIGHT = config.get("trim.right.leaveOneSpace");
 
 function activate(context) {
 
@@ -29,7 +32,7 @@ function activate(context) {
 
 						let currentRange = editor.document.getWordRangeAtPosition(selection.start);
 
-						if (currentRange == undefined && DELETE_LINE_ON_NO_SELECTION) {
+						if (currentRange == undefined && DELETE_LINE_IF_NO_SELECTION) {
 
 							deleteLine(editor, editBuilder, selection);
 							return;
@@ -37,7 +40,7 @@ function activate(context) {
 
 						deleteText(editor, editBuilder, currentRange);
 					}
-					else if (DELETE_LINE_ON_NO_SELECTION) {
+					else if (DELETE_LINE_IF_NO_SELECTION) {
 
 						deleteLine(editor, editBuilder, selection);
 					}
@@ -128,10 +131,9 @@ function getNumberOfSpacesToTrimLeft(editor, currentRange) {
 
 	console.log(`Number left spaces that will be deleted before leaveOneSpace flag: ${numberOfSpaces}`);
 
-	let leaveOneSpace = false;
-	if (leaveOneSpace && numberOfSpaces > 0) {
+	if (TRIM_TO_ONE_SPACE_LEFT && numberOfSpaces > 0) {
 		numberOfSpaces -= 1;
-		console.log(`leaveOneSpace = ${leaveOneSpace}. Final number of spaces that will be deleted: ${numberOfSpaces}`)
+		console.log(`leaveOneSpace = ${TRIM_TO_ONE_SPACE_LEFT}. Final number of spaces that will be deleted: ${numberOfSpaces}`)
 	}
 
 	return numberOfSpaces;
@@ -164,9 +166,8 @@ function getNumberOfSpacesToTrimRight(editor, currentRange) {
 
 	console.log(`Number right spaces that will be deleted before leaveOneSpace flag: ${numberOfSpaces}`);
 
-	let leaveOneSpace = false;
-	if (leaveOneSpace) {
-		console.log(`leaveOneSpace = ${leaveOneSpace}. Final number of spaces that will be deleted: ${numberOfSpaces}`)
+	if (TRIM_TO_ONE_SPACE_RIGHT) {
+		console.log(`leaveOneSpace = ${TRIM_TO_ONE_SPACE_RIGHT}. Final number of spaces that will be deleted: ${numberOfSpaces}`)
 		numberOfSpaces -= 1;
 	}
 

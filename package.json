@@ -1,8 +1,11 @@
 {
   "name": "cutcopypastedelete",
-  "displayName": "CutCopyPasteDELETE",
+  "displayName": "Cut Copy Paste DELETE",
+  "icon": "",
+  "homepage": "",
+  "bugs": {},
   "author": {
-    "name": "WhiteCat Software"
+    "name": "George T"
   },
   "publisher": "WhiteCat Software",
   "description": "Adds Delete to the editor's right click context menu",
@@ -37,32 +40,55 @@
       ]
     },
     "configuration": {
-      "title": "DeleteLineWhenNoTextSelected",
+      "title": "CutCopyPaste DELETE",
       "properties": {
-        "cutcopypastedelete.deleteLineOnNoSeletion": {
+        "cutcopypastedelete.deleteWordUnderTheCaret.enabled": {
+          "order": 0,
           "type": "boolean",
           "default": true,
-          "description": "Delete line if no text is selected."
+          "description": "When enabled deletes word under the caret"
         },
-        "cutcopypastedelete.emptyLineOnNoSeletion": {
-          "type": "boolean",
-          "default": false,
-          "description": "Delete line if no text is selected."
-        },
-        "cutcopypastedelete.deleteWordUnderTheCaret": {
+        "cutcopypastedelete.deleteWordUnderTheCaret.deleteLineWhenCaretAtEndOfLineCharacter.enabled": {
+          "order": 1,
           "type": "boolean",
           "default": true,
-          "description": "Delete the word the caret is pointing at."
+          "description": "When enabled deletes the whole line instead of the word when the caret is at the last character of the current line. REQUIRES \"Delete Word Under The Caret\" to be enabled"
         },
-        "cutcopypastedelete.trimLeft": {
+        "cutcopypastedelete.deleteLineIfNoSeletion.enabled": {
+          "order": 2,
           "type": "boolean",
           "default": false,
-          "description": "Delete the word the caret is pointing at and trim right spaces."
+          "description": "When enabled deletes line if no text is selected. \"Delete Word Under The Caret\" takes precedence over this setting, if enabled it will delete the word instead of the line when caret is pointed at the word"
         },
-        "cutcopypastedelete.trimRight": {
+        "cutcopypastedelete.deleteLineIfNoSeletion.emptyLine.enabled": {
+          "order": 3,
           "type": "boolean",
           "default": false,
-          "description": "Delete the word the caret is pointing at and trim right spaces."
+          "description": "When enabled empties the line instead of deleting it. REQUIRES \"Delete Line If No Seletion\" to be enabled"
+        },
+        "cutcopypastedelete.trim.left.enabled": {
+          "order": 4,
+          "type": "boolean",
+          "default": false,
+          "description": "When enabled trims whitespace to the left of deleted text"
+        },
+        "cutcopypastedelete.trim.left.leaveOneSpace": {
+          "order": 5,
+          "type": "boolean",
+          "default": false,
+          "description": "When enabled leaves one whitespace to the left of deleted text. REQUIRES Left Trim to be enabled"
+        },
+        "cutcopypastedelete.trim.right.enabled": {
+          "order": 6,
+          "type": "boolean",
+          "default": false,
+          "description": "When enabled trims whitespace to the right of deleted text"
+        },
+        "cutcopypastedelete.trim.right.leaveOneSpace": {
+          "order": 7,
+          "type": "boolean",
+          "default": false,
+          "description": "When enabled leaves one whitespace to the right of deleted text. REQUIRES Right Trim to be enabled"
         }
       }
     }

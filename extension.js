@@ -11,9 +11,9 @@ function activate(context) {
 		const editor = vscode.window.activeTextEditor;
 
 		let config = vscode.workspace.getConfiguration('cutcopypastedelete');
-		let configg = config.get("deleteLineOnNoSeletion");
-		vscode.window.showInformationMessage(configg);
-
+		let deleteLine = config.get("deleteLineOnNoSeletion");
+		let deleteWordUnderCaret = config.get("deleteWordUnderTheCaret");
+		vscode.window.showInformationMessage(deleteLine);
 
 		if (editor) {
 
@@ -31,39 +31,33 @@ function activate(context) {
 			editor.edit(editBuilder => {
 				editor.selections.forEach(selection => {
 					if (selection && !selection.isEmpty) {
-						console.log(selection);
+						console.log(`Deleted: ${editor.document.getText(selection)}`);
 						editBuilder.delete(selection)
 					}
-					else if (configg) {
+					else if (deleteWordUnderCaret) {
 
 						// const selectionRange = new vscode.Range(editor.selection.start.line, editor.selection.end.character);
 
-						const currentLineRange = editor.document.lineAt(selection.active.line).range;
+						// editor.selections.forEach(selection => {
+						// 	(selection.active.line).range;
 
-						editBuilder.delete(currentLineRange);
+						// const selectionRange = new vscode.Range(selection.start, selection.end);
+
+						// const currentLineRange = editor.document.lineAt(selection).range;
+
+						const wordRange = editor.document.getWordRangeAtPosition(selection.start);
+
+						console.log(`Deleted: ${editor.document.getText(wordRange)}`);
+
+						editBuilder.delete(wordRange);
 					}
 				})
 			})
-
-			// delete line - Make this an option?
 
 			console.log("End");
 			vscode.window.showInformationMessage("End");
 		}
 	});
-
-	// const selectionRange = new vscode.Range(selection.start, selection.end);
-	// const selectedText = editor.document.getText(selectionRange);
-	// console.log(selectedText);
-
-	// const document = editor.document;
-
-	// editor.edit(editBuilder => {
-	// 	editor.selections.forEach(sel => {
-	// 		const range = sel.isEmpty ? document.getWordRangeAtPosition(sel.start) || sel : sel;
-	// 	})
-	// })
-
 
 	context.subscriptions.push(disposable);
 }

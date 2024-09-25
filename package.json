@@ -1,7 +1,9 @@
 {
   "name": "cutcopypastedelete",
   "displayName": "CutCopyPasteDELETE",
-  "author": {"name": "WhiteCat Software"},
+  "author": {
+    "name": "WhiteCat Software"
+  },
   "publisher": "WhiteCat Software",
   "description": "Adds Delete to the editor's right click context menu",
   "version": "0.0.1",
@@ -35,12 +37,17 @@
       ]
     },
     "configuration": {
-      "title": "limess",
+      "title": "DeleteLineWhenNoTextSelected",
       "properties": {
         "cutcopypastedelete.deleteLineOnNoSeletion": {
           "type": "boolean",
-          "default": false,
-          "description": "Delete the line if no text is selected."
+          "default": true,
+          "description": "Delete line if no text is selected."
+        },
+        "cutcopypastedelete.deleteWordUnderTheCaret": {
+          "type": "boolean",
+          "default": true,
+          "description": "Delete the word the caret is pointing at."
         }
       }
     }

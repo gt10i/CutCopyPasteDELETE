@@ -15,29 +15,36 @@
     "commands": [
       {
         "command": "cutcopypastedelete.helloWorld",
-        "title": "Hello World"
+        "title": "Delete"
       }
     ],
     "menus": {
       "commandPalette": [
         {
-          "command": "extension.sayHello",
+          "command": "cutcopypastedelete.helloWorld",
           "when": "editorHasSelection"
         }
+      ],
+      "editor/context": [
+        {
+          "command": "cutcopypastedelete.helloWorld",
+          "group": "9_cutcopypaste@5"
+        }
       ]
-    },
-    "scripts": {
-      "lint": "eslint .",
-      "pretest": "npm run lint",
-      "test": "vscode-test"
-    },
-    "devDependencies": {
-      "@types/vscode": "^1.88.0",
-      "@types/mocha": "^10.0.6",
-      "@types/node": "18.x",
-      "eslint": "^8.57.0",
-      "typescript": "^5.4.5",
-      "@vscode/test-cli": "^0.0.8",
-      "@vscode/test-electron": "^2.3.9"
     }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.88.0",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5",
+    "@vscode/test-cli": "^0.0.8",
+    "@vscode/test-electron": "^2.3.9"
   }
+}

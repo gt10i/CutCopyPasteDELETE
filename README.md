@@ -10,7 +10,7 @@ I hope you will find it useful.
 
 ## Features
 
-![context menu](https://github.com/gt10i/CutCopyPasteDELETE/images/README/ContextMenu.png)
+![context menu](https://raw.githubusercontent.com/gt10i/CutCopyPasteDELETE/refs/heads/main/images/README/ContextMenu.png)
 
 Depending on how you configure it, this extension can do the following:
 

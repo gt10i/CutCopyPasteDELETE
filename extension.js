@@ -10,7 +10,15 @@ function activate(context) {
 
 	let disposable = vscode.commands.registerCommand('cutcopypastedelete.helloWorld', function () {
 
-		vscode.window.showInformationMessage('Hello World from CutCopyPasteDELETE!');
+		const editor = vscode.window.activeTextEditor;
+		const selection = editor.selection;
+		if (selection && !selection.isEmpty) {
+			const selectionRange = new vscode.Range(selection.start, selection.end);
+			const highlighted = editor.document.getText(selectionRange);
+
+		vscode.window.showInformationMessage('Hello World from CutCopyPasteDELETE!' + highlighted);
+		}
+
 	});
 
 	context.subscriptions.push(disposable);

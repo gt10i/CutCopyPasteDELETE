@@ -12,6 +12,7 @@ function activate(context) {
 
 		let config = vscode.workspace.getConfiguration('cutcopypastedelete');
 		let deleteLine = config.get("deleteLineOnNoSeletion");
+		let emptyLine = config.get("emptyLineOnNoSeletion");
 		let deleteWordUnderTheCaret = config.get("deleteWordUnderTheCaret");
 		let trimRight = config.get("trimRight");
 
@@ -26,14 +27,19 @@ function activate(context) {
 					}
 					else if (deleteLine) {
 
-						// const currentLineWithLineBreak = editor.document.lineAt(selection.active.line).rangeIncludingLineBreak;
+						const currentLineRangeWithLineBreak = editor.document.lineAt(selection.active.line).rangeIncludingLineBreak;
+
+						editBuilder.delete(currentLineRangeWithLineBreak);
+
+						console.log(`Deleted line: ${editor.document.getText(currentLineRangeWithLineBreak)}`);
+					}
+					else if (emptyLine) {
+
 						const currentLineRange = editor.document.lineAt(selection.active.line).range;
 
-						// editBuilder.delete(currentLineWithLineBreak);
 						editBuilder.delete(currentLineRange);
 
-						// console.log(`Deleted line: ${editor.document.getText(currentLineWithLineBreak)}`);
-
+						console.log(`Deleted line: ${editor.document.getText(currentLineRange)}`);
 					}
 					else if (deleteWordUnderTheCaret){
 

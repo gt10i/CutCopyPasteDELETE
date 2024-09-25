@@ -1,6 +1,6 @@
 Copyright (c) WhiteCat Software
 
-All rights reserved. 
+All rights reserved.
 
 MIT License
 

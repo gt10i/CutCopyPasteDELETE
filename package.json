@@ -5,7 +5,7 @@
   "icon": "images/icon.png",
   "repository": {
 		"type": "git",
-		"url": "https://github.com/gt10i/CutCopyPasteDELETE"
+		"url": "https://github.com/gt10i/CutCopyPasteDELETE.git"
 	},
   "license": "MIT",
   "author": {

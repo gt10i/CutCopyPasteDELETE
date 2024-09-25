@@ -21,6 +21,9 @@ function activate(context) {
 			editor.edit(editBuilder => {
 				editor.selections.forEach(selection => {
 					if (selection && !selection.isEmpty) {
+
+						// if trim left - getNumberOfSpacesToTrimLeft
+						// if trim right - getNumberOfSpacesToTrimRight
 						console.log(`Deleted: ${editor.document.getText(selection)}`);
 						editBuilder.delete(selection)
 
@@ -116,7 +119,6 @@ function activate(context) {
 						let nextCharacterRange = new vscode.Range(endPositionOfWord, overStep);
 						let nextCharacter = editor.document.getText(nextCharacterRange);
 
-						let emptyLog = "";
 						let numberOfSpaces = 0;
 
 						while (nextCharacter === " ") {

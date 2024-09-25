@@ -10,7 +10,7 @@ I hope you will find it useful.
 
 ## Features
 
-![context menu](images/ContextMenu.png)
+![context menu](images/README/ContextMenu.png)
 
 Depending on how you configure it, this extension can do the following:
 

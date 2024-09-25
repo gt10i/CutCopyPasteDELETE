@@ -4,12 +4,12 @@ const vscode = require('vscode');
  * @param {vscode.ExtensionContext} context
  */
 
-const config = vscode.workspace.getConfiguration('cutcopypastedelete');
-const deleteLineOnNoSelection = config.get("deleteLineOnNoSeletion");
-const emptyLine = config.get("emptyLineOnNoSeletion");
-const deleteWordUnderTheCaret = config.get("deleteWordUnderTheCaret");
-const trimLeft = config.get("trimLeft")
-const trimRight = config.get("trimRight");
+const CONFIG = vscode.workspace.getConfiguration('cutcopypastedelete');
+const DELETE_LINE_ON_NO_SELECTION = CONFIG.get("deleteLineOnNoSeletion");
+const EMPTY_LINE = CONFIG.get("emptyLineOnNoSeletion");
+const DELETE_WORD_UNDER_THE_CARET = CONFIG.get("deleteWordUnderTheCaret");
+const TRIM_LEFT = CONFIG.get("trimLeft")
+const TRIM_RIGHT = CONFIG.get("trimRight");
 
 function activate(context) {
 
@@ -25,12 +25,12 @@ function activate(context) {
 						let currentRange = new vscode.Range(selection.start, selection.end)
 						deleteText(editor, editBuilder, currentRange);
 					}
-					else if (deleteWordUnderTheCaret) {
+					else if (DELETE_WORD_UNDER_THE_CARET) {
 
 						let currentRange = editor.document.getWordRangeAtPosition(selection.start);
 						deleteText(editor, editBuilder, currentRange);
 					}
-					else if (deleteLineOnNoSelection) {
+					else if (DELETE_LINE_ON_NO_SELECTION) {
 
 						deleteLine(editor, editBuilder, selection);
 					}
@@ -48,14 +48,14 @@ function activate(context) {
 function deleteText(editor, editBuilder, currentRange) {
 
 	let numberOfSpacesToTrimLeft = 0
-	if (trimLeft) {
-		console.log(`TrimLeft = ${trimLeft}`)
+	if (TRIM_LEFT) {
+		console.log(`TrimLeft = ${TRIM_LEFT}`)
 		numberOfSpacesToTrimLeft = getNumberOfSpacesToTrimLeft(editor, currentRange);
 	}
 
 	let numberOfSpacesToTrimRight = 0
-	if (trimRight) {
-		console.log(`TrimRight = ${trimRight}`)
+	if (TRIM_RIGHT) {
+		console.log(`TrimRight = ${TRIM_RIGHT}`)
 		numberOfSpacesToTrimRight = getNumberOfSpacesToTrimRight(editor, currentRange);
 	}
 
@@ -72,7 +72,7 @@ function deleteLine(editor, editBuilder, selection) {
 
 	let lineDeleteRange = editor.document.lineAt(selection.active.line).rangeIncludingLineBreak;
 
-	if (emptyLine) {
+	if (EMPTY_LINE) {
 		lineDeleteRange = editor.document.lineAt(selection.active.line).range;
 	}
 

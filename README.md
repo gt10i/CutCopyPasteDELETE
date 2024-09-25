@@ -1,12 +1,12 @@
-# CutCopyPaste DELETE 
+# CutCopyPasteDELETE 
 
-This extension adds Delete to the editor's right-click context menu. 
+Adds "Delete" command to the editor's right-click context menu. 
 
-As a long time user of Notepad.exe I am used to right clicking on text and deleting it. For some reason VS Code lacks the "Delete" command in the right-click context menu. This prompted me to create this extension. 
+As a long time user of Notepad.exe I am used to right-clicking on text, and deleting it from the context menu. For some reason VS Code does not have the "Delete" command in the right-click context menu, so I made this. 
 
-I added some extra features, such as trimming whitespace (more on that in the Extension Settings section below). 
+This extension has some some extra features other than deleting selected text. Read more on that in the *Extension Settings* section below. 
 
-I hope you will find this extension useful. 
+I hope you will find it useful. 
 
 ## Features 
 
@@ -28,11 +28,11 @@ Depending on how you configure it, this extension can do the following:
 
 This extension contributes the following settings: 
 
-*Please restart Visual Studio Code for them to take effect* 
+*Please restart Visual Studio Code for changes to take effect* 
 
 - `cutCopyPasteDelete.deleteWordUnderTheCaret.enabled` 
 
-    If enabled, you can right click on a word and click "Delete" to delete it 
+    If enabled, you can right click on a word and click "Delete" to delete it, no need to select it first 
 
 - `cutCopyPasteDelete.deleteWordUnderTheCaret.deleteLineWhenCaretAtEndOfLineCharacter.enabled` 
 
@@ -40,27 +40,27 @@ This extension contributes the following settings:
 
 - `cutCopyPasteDelete.deleteLineIfNoSeletion.enabled` 
 
-    When enabled will delete a whole line when the caret is placed on whitespace 
+    If enabled, will delete the whole line when the caret is placed on whitespace. If `deleteWordUnderTheCaret` is disabled, will delete lines when right clicking on words too
 
 - `cutCopyPasteDelete.deleteLineIfNoSeletion.emptyLine.enabled` 
 
-    This is a modification to `deleteLineIfNoSeletion`. If enabled empty the line instead of deleting it 
+    This is a modification to `deleteLineIfNoSeletion`. If enabled, empties the line instead of deleting it 
 
 - `cutCopyPasteDelete.trim.left.enabled` 
 
-    If enabled will trim all whitespace left of the word or selected text 
+    If enabled, will trim all whitespace to the left of the word or selected text 
 
 - `cutCopyPasteDelete.trim.left.leaveOneSpace` 
 
-    If enabled will leave one whitespace after trimming to the left of the word or selected text 
+    If enabled, will leave one whitespace after trimming to the left of the word or selected text 
 
 - `cutCopyPasteDelete.trim.right.enabled` 
 
-    If enabled will trim all whitespace right of the word or selected text 
+    If enabled, will trim all whitespace to the right of the word or selected text 
 
 - `cutCopyPasteDelete.trim.right.leaveOneSpace` 
 
-    If enabled will leave one whitespace after trimming to the right of the word or selected text 
+    If enabled, will leave one whitespace after trimming to the right of the word or selected text 
 
 ## Known Issues 
 
@@ -70,4 +70,4 @@ This extension contributes the following settings:
 
 ### 1.0.0 
 
-Initial release of CutCopyPaste DELETE 
+Initial release of CutCopyPasteDELETE 

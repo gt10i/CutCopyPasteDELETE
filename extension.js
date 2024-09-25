@@ -40,19 +40,14 @@ function activate(context) {
 					}
 					else if (deleteLine) {
 
-						const currentLineRangeWithLineBreak = editor.document.lineAt(selection.active.line).rangeIncludingLineBreak;
+						let lineDeleteRange = editor.document.lineAt(selection.active.line).rangeIncludingLineBreak;
 
-						editBuilder.delete(currentLineRangeWithLineBreak);
+						if (emptyLine) {
+							lineDeleteRange = editor.document.lineAt(selection.active.line).range;
+						}
 
-						console.log(`Deleted line: ${editor.document.getText(currentLineRangeWithLineBreak)}`);
-					}
-					else if (emptyLine) {
-
-						const currentLineRange = editor.document.lineAt(selection.active.line).range;
-
-						editBuilder.delete(currentLineRange);
-
-						console.log(`Deleted line: ${editor.document.getText(currentLineRange)}`);
+						editBuilder.delete(lineDeleteRange);
+						console.log(`Deleted line: ${editor.document.getText(lineDeleteRange)}`);
 					}
 					else if (deleteWordUnderTheCaret){
 

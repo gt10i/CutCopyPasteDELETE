@@ -55,20 +55,6 @@ function activate(context) {
 						editBuilder.delete(lineDeleteRange);
 						console.log(`Deleted line: ${editor.document.getText(lineDeleteRange)}`);
 					}
-					// else if (deleteWordUnderTheCaret && trimLeft) {
-
-					// 	let currentRange = editor.document.getWordRangeAtPosition(selection.start);
-
-					// 	let finalEndPosition = new vscode.Position(currentRange.end.line, (currentRange.end.character));
-
-					// 	let finalStartPosition = new vscode.Position(currentRange.end.line, (currentRange.start.character) - numberOfSpaces);
-
-					// 	let deletionWithTrimRange = new vscode.Range(finalStartPosition, finalEndPosition);
-
-					// 	console.log(`Deleted: ${editor.document.getText(deletionWithTrimRange)} (${numberOfSpaces} spaces)`);
-
-					// 	editBuilder.delete(deletionWithTrimRange);
-					// }
 					else if (deleteWordUnderTheCaret) {
 
 						let currentRange = editor.document.getWordRangeAtPosition(selection.start);

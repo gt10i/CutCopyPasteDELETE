@@ -61,7 +61,3 @@ This extension contributes the following settings:
 - `cutCopyPasteDelete.trim.right.leaveOneSpace`
 
     If enabled, will leave one whitespace after trimming to the right of the word or selected text
-
-## Known Issues
-
-¯\\_(ツ)_/¯ you tell me ...

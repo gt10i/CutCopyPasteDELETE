@@ -49,15 +49,7 @@ function activate(context) {
 						editBuilder.delete(lineDeleteRange);
 						console.log(`Deleted line: ${editor.document.getText(lineDeleteRange)}`);
 					}
-					else if (deleteWordUnderTheCaret){
-
-						const word = editor.document.getWordRangeAtPosition(selection.start);
-
-						editBuilder.delete(word);
-
-						console.log(`Deleted: ${editor.document.getText(word)}`);
-					}
-					else if (deleteWordUnderTheCaret || trimLeft) {
+					else if (deleteWordUnderTheCaret && trimLeft) {
 
 						let currentRange = editor.document.getWordRangeAtPosition(selection.start);
 

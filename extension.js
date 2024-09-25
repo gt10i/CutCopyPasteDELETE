@@ -123,7 +123,7 @@ function getNumberOfSpacesToTrimLeft(editor, currentRange) {
 
 	let numberOfSpaces = 0;
 
-	while (previousCharacter === " ") {
+	while (previousCharacter == " ") {
 
 		numberOfSpaces++;
 
@@ -160,7 +160,7 @@ function getNumberOfSpacesToTrimRight(editor, currentRange) {
 
 	let numberOfSpaces = 0;
 
-	while (nextCharacter === " ") {
+	while (nextCharacter == " ") {
 
 		let head = overStep.character;
 

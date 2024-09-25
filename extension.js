@@ -26,19 +26,14 @@ function activate(context) {
 					}
 					else if (deleteLine) {
 
-						const wordRange = editor.document.getWordRangeAtPosition(selection.start);
+						// const currentLineWithLineBreak = editor.document.lineAt(selection.active.line).rangeIncludingLineBreak;
+						const currentLineRange = editor.document.lineAt(selection.active.line).range;
 
-						console.log(`Deleted: ${editor.document.getText(wordRange)}`);
+						// editBuilder.delete(currentLineWithLineBreak);
+						editBuilder.delete(currentLineRange);
 
-						// editBuilder.delete(wordRange);
+						// console.log(`Deleted line: ${editor.document.getText(currentLineWithLineBreak)}`);
 
-						// editor.selections.forEach(selection => {
-						// 	(selection.active.line).range;
-
-						// const currentLineRange = editor.document.lineAt(selection).range;
-						// const selectionRange = new vscode.Range(selection.start, selection.end);
-
-						editBuilder.delete();
 					}
 					else if (deleteWordUnderTheCaret){
 

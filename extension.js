@@ -81,7 +81,7 @@ function deleteText(editor, editBuilder, currentRange) {
 		numberOfSpacesToTrimRight = getNumberOfSpacesToTrimRight(editor, currentRange);
 	}
 
-	let finalStartPosition = new vscode.Position(currentRange.end.line, currentRange.start.character - numberOfSpacesToTrimLeft);
+	let finalStartPosition = new vscode.Position(currentRange.start.line, currentRange.start.character - numberOfSpacesToTrimLeft);
 	let finalEndPosition = new vscode.Position(currentRange.end.line, currentRange.end.character + numberOfSpacesToTrimRight);
 	let deletionWithTrimRange = new vscode.Range(finalStartPosition, finalEndPosition);
 

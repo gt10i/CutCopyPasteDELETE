@@ -17,7 +17,6 @@ const TRIM_TO_ONE_SPACE_RIGHT = config.get("trim.right.leaveOneSpace");
 function activate(context) {
 
 	let disposable = vscode.commands.registerCommand('cutcopypastedelete.deleteEditorContextMenu', function () {
-
 		const editor = vscode.window.activeTextEditor;
 
 		if (editor) {

@@ -1,4 +1,4 @@
-# CutCopyPaste DELETE
+# CutCopyPaste DELETE 
 
 This extension adds Delete to the editor's right-click context menu. 
 
@@ -8,27 +8,27 @@ I added some extra features, such as trimming whitespace (more on that in the Ex
 
 I hope you will find this extension useful. 
 
-## Features
+## Features 
 
 ![fefe](images/ContextMenu.png)
 
-Depending on how you configure it, this extension can do the following:
+Depending on how you configure it, this extension can do the following: 
 
-    - Delete selected text
-    - Delete the underlying word, if no text selected
-        Delete line if the caret is placed at the end of the last character on the line
-    - Delete line if nothing is selected
-        Delete line / Empty line
-    - Trim whitespace left
-        Leave one space
-    - Trim whitespace right
-        Leave one space
+    - Delete selected text 
+    - Delete the underlying word, if no text selected 
+        Delete line if the caret is placed at the end of the last character on the line 
+    - Delete line if nothing is selected 
+        Delete line / Empty line 
+    - Trim whitespace left 
+        Leave one space 
+    - Trim whitespace right 
+        Leave one space 
 
-## Extension Settings
+## Extension Settings 
 
 This extension contributes the following settings: 
 
-*Please restart Visual Studio Code for them to take effect*
+*Please restart Visual Studio Code for them to take effect* 
 
 - `cutCopyPasteDelete.deleteWordUnderTheCaret.enabled` 
 
@@ -36,39 +36,38 @@ This extension contributes the following settings:
 
 - `cutCopyPasteDelete.deleteWordUnderTheCaret.deleteLineWhenCaretAtEndOfLineCharacter.enabled` 
 
-
     This a modification to `deleteWordUnderTheCaret`. If enable it, when the caret is placed after the last character on the line, it will delete the whole line instead of the last word 
 
-- `cutCopyPasteDelete.deleteLineIfNoSeletion.enabled`
+- `cutCopyPasteDelete.deleteLineIfNoSeletion.enabled` 
 
-    When enabled will delete a whole line when the caret is placed on whitespace
+    When enabled will delete a whole line when the caret is placed on whitespace 
 
-- `cutCopyPasteDelete.deleteLineIfNoSeletion.emptyLine.enabled`
+- `cutCopyPasteDelete.deleteLineIfNoSeletion.emptyLine.enabled` 
 
-    This is a modification to `deleteLineIfNoSeletion`. If enabled empty the line instead of deleting it
+    This is a modification to `deleteLineIfNoSeletion`. If enabled empty the line instead of deleting it 
 
-- `cutCopyPasteDelete.trim.left.enabled`
+- `cutCopyPasteDelete.trim.left.enabled` 
 
-    If enabled will trim all whitespace left of the word or selected text
+    If enabled will trim all whitespace left of the word or selected text 
 
 - `cutCopyPasteDelete.trim.left.leaveOneSpace` 
 
-    If enabled will leave one whitespace after trimming to the left of the word or selected text
+    If enabled will leave one whitespace after trimming to the left of the word or selected text 
 
 - `cutCopyPasteDelete.trim.right.enabled` 
 
-    If enabled will trim all whitespace right of the word or selected text
+    If enabled will trim all whitespace right of the word or selected text 
 
 - `cutCopyPasteDelete.trim.right.leaveOneSpace` 
 
-    If enabled will leave one whitespace after trimming to the right of the word or selected text
+    If enabled will leave one whitespace after trimming to the right of the word or selected text 
 
-## Known Issues
+## Known Issues 
 
-¯\\_(ツ)_/¯ you tell me ...
+¯\\_(ツ)_/¯ you tell me ... 
 
-## Release Notes
+## Release Notes 
 
-### 1.0.0
+### 1.0.0 
 
-Initial release of CutCopyPaste DELETE
+Initial release of CutCopyPaste DELETE 

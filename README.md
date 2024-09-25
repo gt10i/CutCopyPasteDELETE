@@ -1,65 +1,74 @@
-# cutcopypastedelete README
+# CutCopyPaste DELETE
 
-This is the README for your extension "cutcopypastedelete". After writing up a brief description, we recommend including the following sections.
+This extension adds Delete to the editor's right-click context menu. 
+
+As a long time user of Notepad.exe I am used to right clicking on text and deleting it. For some reason VS Code lacks the "Delete" command in the right-click context menu. This prompted me to create this extension. 
+
+I added some extra features, such as trimming whitespace (more on that in the Extension Settings section below). 
+
+I hope you will find this extension useful. 
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+![fefe](images/ContextMenu.png)
 
-For example if there is an image subfolder under your extension project workspace:
+Depending on how you configure it, this extension can do the following:
 
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+    - Delete selected text
+    - Delete the underlying word, if no text selected
+        Delete line if the caret is placed at the end of the last character on the line
+    - Delete line if nothing is selected
+        Delete line / Empty line
+    - Trim whitespace left
+        Leave one space
+    - Trim whitespace right
+        Leave one space
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+This extension contributes the following settings: 
 
-For example:
+*Please restart Visual Studio Code for them to take effect*
 
-This extension contributes the following settings:
+- `cutCopyPasteDelete.deleteWordUnderTheCaret.enabled` 
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+    If enabled, you can right click on a word and click "Delete" to delete it 
+
+- `cutCopyPasteDelete.deleteWordUnderTheCaret.deleteLineWhenCaretAtEndOfLineCharacter.enabled` 
+
+
+    This a modification to `deleteWordUnderTheCaret`. If enable it, when the caret is placed after the last character on the line, it will delete the whole line instead of the last word 
+
+- `cutCopyPasteDelete.deleteLineIfNoSeletion.enabled`
+
+    When enabled will delete a whole line when the caret is placed on whitespace
+
+- `cutCopyPasteDelete.deleteLineIfNoSeletion.emptyLine.enabled`
+
+    This is a modification to `deleteLineIfNoSeletion`. If enabled empty the line instead of deleting it
+
+- `cutCopyPasteDelete.trim.left.enabled`
+
+    If enabled will trim all whitespace left of the word or selected text
+
+- `cutCopyPasteDelete.trim.left.leaveOneSpace` 
+
+    If enabled will leave one whitespace after trimming to the left of the word or selected text
+
+- `cutCopyPasteDelete.trim.right.enabled` 
+
+    If enabled will trim all whitespace right of the word or selected text
+
+- `cutCopyPasteDelete.trim.right.leaveOneSpace` 
+
+    If enabled will leave one whitespace after trimming to the right of the word or selected text
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+¯\\_(ツ)_/¯ you tell me ...
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
 ### 1.0.0
 
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Initial release of CutCopyPaste DELETE

@@ -1,6 +1,6 @@
 {
   "name": "cutcopypastedelete",
-  "displayName": "CutCopyPasteDELETE",
+  "displayName": "CutCopyPaste DELETE",
   "icon": "images/icon.png",
   "homepage": "",
   "repository": "https://github.com/gt10i/CutCopyPasteDELETE",
@@ -11,7 +11,7 @@
   },
   "publisher": "WhiteCat Software",
   "description": "Adds Delete command to the editor's right click context menu",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.88.1"
   },
@@ -42,7 +42,7 @@
       ]
     },
     "configuration": {
-      "title": "CutCopyPasteDELETE",
+      "title": "CutCopyPaste DELETE",
       "properties": {
         "cutCopyPasteDelete.deleteWordUnderTheCaret.enabled": {
           "order": 0,

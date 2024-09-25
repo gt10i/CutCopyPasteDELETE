@@ -8,4 +8,4 @@
 
 ### Changed
 
-- Updated extension description formatting in README.md file
+- Updated extension description formatting in the README.md file

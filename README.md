@@ -71,3 +71,7 @@ This extension contributes the following settings:
 ### 1.0.0
 
 Initial release of CutCopyPaste DELETE
+
+### 1.0.1
+
+Updated extension description formatting in the README.md file

@@ -178,7 +178,7 @@ function getNumberOfSpacesToTrimRight(editor, currentRange) {
 
 	console.log(`Number right spaces that will be deleted before leaveOneSpace flag: ${numberOfSpaces}`);
 
-	if (TRIM_TO_ONE_SPACE_RIGHT) {
+	if (TRIM_TO_ONE_SPACE_RIGHT && numberOfSpaces > 0) {
 		console.log(`leaveOneSpace = ${TRIM_TO_ONE_SPACE_RIGHT}. Final number of spaces that will be deleted: ${numberOfSpaces}`)
 		numberOfSpaces -= 1;
 	}

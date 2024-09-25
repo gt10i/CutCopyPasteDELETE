@@ -9,7 +9,7 @@
     "name": "George",
     "email": "gt10i.dev@gmail.com"
   },
-  "publisher": "WhiteCat Software",
+  "publisher": "WhiteCatSoftware",
   "description": "Adds Delete command to the editor's right click context menu",
   "version": "1.0.0",
   "engines": {

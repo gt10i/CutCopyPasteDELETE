@@ -41,10 +41,15 @@
       "properties": {
         "cutcopypastedelete.deleteLineOnNoSeletion": {
           "type": "boolean",
-          "default": true,
+          "default": false,
           "description": "Delete line if no text is selected."
         },
         "cutcopypastedelete.deleteWordUnderTheCaret": {
+          "type": "boolean",
+          "default": true,
+          "description": "Delete the word the caret is pointing at."
+        },
+        "cutcopypastedelete.TrimRight": {
           "type": "boolean",
           "default": true,
           "description": "Delete the word the caret is pointing at."

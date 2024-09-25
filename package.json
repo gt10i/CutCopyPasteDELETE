@@ -13,7 +13,7 @@
     "email": "gt10i.dev@gmail.com"
   },
   "publisher": "WhiteCatSoftware",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.88.1"
   },

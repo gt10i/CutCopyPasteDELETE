@@ -4,18 +4,18 @@ const vscode = require('vscode');
  * @param {vscode.ExtensionContext} context
  */
 
+const config = vscode.workspace.getConfiguration('cutcopypastedelete');
+const deleteLineOnNoSelection = config.get("deleteLineOnNoSeletion");
+const emptyLine = config.get("emptyLineOnNoSeletion");
+const deleteWordUnderTheCaret = config.get("deleteWordUnderTheCaret");
+const trimLeft = config.get("trimLeft")
+const trimRight = config.get("trimRight");
+
 function activate(context) {
 
 	let disposable = vscode.commands.registerCommand('cutcopypastedelete.deleteEditorContextMenu', function () {
 
 		const editor = vscode.window.activeTextEditor;
-
-		let config = vscode.workspace.getConfiguration('cutcopypastedelete');
-		let deleteLine = config.get("deleteLineOnNoSeletion");
-		let emptyLine = config.get("emptyLineOnNoSeletion");
-		let deleteWordUnderTheCaret = config.get("deleteWordUnderTheCaret");
-		let trimLeft = config.get("trimLeft")
-		let trimRight = config.get("trimRight");
 
 		if (editor) {
 			editor.edit(editBuilder => {
@@ -23,61 +23,16 @@ function activate(context) {
 					if (selection && !selection.isEmpty) {
 
 						let currentRange = new vscode.Range(selection.start, selection.end)
-
-						let numberOfSpacesToTrimLeft = 0
-						if (trimLeft) {
-							console.log(`TrimLeft = ${trimLeft}`)
-							numberOfSpacesToTrimLeft = getNumberOfSpacesToTrimLeft(editor, currentRange);
-						}
-
-						let numberOfSpacesToTrimRight = 0
-						if (trimRight) {
-							console.log(`TrimRight = ${trimRight}`)
-							numberOfSpacesToTrimRight = getNumberOfSpacesToTrimRight(editor, currentRange);
-						}
-
-						let finalStartPosition = new vscode.Position(currentRange.end.line, currentRange.start.character - numberOfSpacesToTrimLeft);
-						let finalEndPosition = new vscode.Position(currentRange.end.line, currentRange.end.character + numberOfSpacesToTrimRight);
-						let deletionWithTrimRange = new vscode.Range(finalStartPosition, finalEndPosition);
-
-						console.log(`Deleted word under the caret. Text: (${editor.document.getText(deletionWithTrimRange)}) | Spaces trimmed left: ${numberOfSpacesToTrimLeft} | Spaces trimmed right: ${numberOfSpacesToTrimRight}`);
-
-						editBuilder.delete(deletionWithTrimRange);
+						deleteText(editor, editBuilder, currentRange);
 					}
 					else if (deleteWordUnderTheCaret) {
 
 						let currentRange = editor.document.getWordRangeAtPosition(selection.start);
-
-						let numberOfSpacesToTrimLeft = 0
-						if (trimLeft) {
-							console.log(`TrimLeft = ${trimLeft}`)
-							numberOfSpacesToTrimLeft = getNumberOfSpacesToTrimLeft(editor, currentRange);
-						}
-
-						let numberOfSpacesToTrimRight = 0
-						if (trimRight) {
-							console.log(`TrimRight = ${trimRight}`)
-							numberOfSpacesToTrimRight = getNumberOfSpacesToTrimRight(editor, currentRange);
-						}
-
-						let finalStartPosition = new vscode.Position(currentRange.end.line, currentRange.start.character - numberOfSpacesToTrimLeft);
-						let finalEndPosition = new vscode.Position(currentRange.end.line, currentRange.end.character + numberOfSpacesToTrimRight);
-						let deletionWithTrimRange = new vscode.Range(finalStartPosition, finalEndPosition);
-
-						console.log(`Deleted word under the caret. Text: (${editor.document.getText(deletionWithTrimRange)}) | Spaces trimmed left: ${numberOfSpacesToTrimLeft} | Spaces trimmed right: ${numberOfSpacesToTrimRight}`);
-
-						editBuilder.delete(deletionWithTrimRange);
+						deleteText(editor, editBuilder, currentRange);
 					}
-					else if (deleteLine) {
+					else if (deleteLineOnNoSelection) {
 
-						let lineDeleteRange = editor.document.lineAt(selection.active.line).rangeIncludingLineBreak;
-
-						if (emptyLine) {
-							lineDeleteRange = editor.document.lineAt(selection.active.line).range;
-						}
-
-						editBuilder.delete(lineDeleteRange);
-						console.log(`Deleted line: ${editor.document.getText(lineDeleteRange)}`);
+						deleteLine(editor, editBuilder, selection);
 					}
 				})
 			})
@@ -88,6 +43,41 @@ function activate(context) {
 	});
 
 	context.subscriptions.push(disposable);
+}
+
+function deleteText(editor, editBuilder, currentRange) {
+
+	let numberOfSpacesToTrimLeft = 0
+	if (trimLeft) {
+		console.log(`TrimLeft = ${trimLeft}`)
+		numberOfSpacesToTrimLeft = getNumberOfSpacesToTrimLeft(editor, currentRange);
+	}
+
+	let numberOfSpacesToTrimRight = 0
+	if (trimRight) {
+		console.log(`TrimRight = ${trimRight}`)
+		numberOfSpacesToTrimRight = getNumberOfSpacesToTrimRight(editor, currentRange);
+	}
+
+	let finalStartPosition = new vscode.Position(currentRange.end.line, currentRange.start.character - numberOfSpacesToTrimLeft);
+	let finalEndPosition = new vscode.Position(currentRange.end.line, currentRange.end.character + numberOfSpacesToTrimRight);
+	let deletionWithTrimRange = new vscode.Range(finalStartPosition, finalEndPosition);
+
+	console.log(`Deleted word under the caret. Text: (${editor.document.getText(deletionWithTrimRange)}) | Spaces trimmed left: ${numberOfSpacesToTrimLeft} | Spaces trimmed right: ${numberOfSpacesToTrimRight}`);
+
+	editBuilder.delete(deletionWithTrimRange);
+}
+
+function deleteLine(editor, editBuilder, selection) {
+
+	let lineDeleteRange = editor.document.lineAt(selection.active.line).rangeIncludingLineBreak;
+
+	if (emptyLine) {
+		lineDeleteRange = editor.document.lineAt(selection.active.line).range;
+	}
+
+	editBuilder.delete(lineDeleteRange);
+	console.log(`Deleted line: ${editor.document.getText(lineDeleteRange)}`);
 }
 
 function getNumberOfSpacesToTrimLeft(editor, currentRange) {

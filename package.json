@@ -41,7 +41,7 @@
       "properties": {
         "cutcopypastedelete.deleteLineOnNoSeletion": {
           "type": "boolean",
-          "default": false,
+          "default": true,
           "description": "Delete line if no text is selected."
         },
         "cutcopypastedelete.emptyLineOnNoSeletion": {
@@ -51,17 +51,17 @@
         },
         "cutcopypastedelete.deleteWordUnderTheCaret": {
           "type": "boolean",
-          "default": true,
+          "default": false,
           "description": "Delete the word the caret is pointing at."
         },
         "cutcopypastedelete.trimLeft": {
           "type": "boolean",
-          "default": true,
+          "default": false,
           "description": "Delete the word the caret is pointing at and trim right spaces."
         },
         "cutcopypastedelete.trimRight": {
           "type": "boolean",
-          "default": true,
+          "default": false,
           "description": "Delete the word the caret is pointing at and trim right spaces."
         }
       }

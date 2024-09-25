@@ -4,7 +4,7 @@ const vscode = require('vscode');
  * @param {vscode.ExtensionContext} context
  */
 
-var config = vscode.workspace.getConfiguration('cutcopypastedelete');
+var config = vscode.workspace.getConfiguration('cutCopyPasteDelete');
 const DELETE_WORD_UNDER_THE_CARET = config.get("deleteWordUnderTheCaret.enabled")
 const DELETE_LINE_WHEN_CARET_AT_EOLC = config.get("deleteWordUnderTheCaret.deleteLineWhenCaretAtEndOfLineCharacter.enabled");
 const DELETE_LINE_IF_NO_SELECTION = config.get("deleteLineIfNoSeletion.enabled");

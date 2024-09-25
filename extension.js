@@ -14,12 +14,8 @@ function activate(context) {
 		let deleteLine = config.get("deleteLineOnNoSeletion");
 		let deleteWordUnderTheCaret = config.get("deleteWordUnderTheCaret");
 		let trimRight = config.get("trimRight");
-		vscode.window.showInformationMessage(deleteLine);
 
 		if (editor) {
-			// 	})
-			// }
-
 			editor.edit(editBuilder => {
 				editor.selections.forEach(selection => {
 					if (selection && !selection.isEmpty) {
@@ -43,6 +39,14 @@ function activate(context) {
 						// const selectionRange = new vscode.Range(selection.start, selection.end);
 
 						editBuilder.delete();
+					}
+					else if (deleteWordUnderTheCaret){
+
+						const word = editor.document.getWordRangeAtPosition(selection.start);
+
+						editBuilder.delete(word);
+
+						console.log(`Deleted: ${editor.document.getText(wordRange)}`);
 					}
 					else if (deleteWordUnderTheCaret && trimRight) {
 
@@ -82,7 +86,7 @@ function activate(context) {
 						editBuilder.delete(deletionWithTrimRange);
 
 					}
-				}).catch(err => console.log(err));
+				})
 			})
 
 			console.log("End");

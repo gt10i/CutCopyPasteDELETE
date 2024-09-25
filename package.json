@@ -49,10 +49,10 @@
           "default": true,
           "description": "Delete the word the caret is pointing at."
         },
-        "cutcopypastedelete.TrimRight": {
+        "cutcopypastedelete.trimRight": {
           "type": "boolean",
-          "default": true,
-          "description": "Delete the word the caret is pointing at."
+          "default": false,
+          "description": "Delete the word the caret is pointing at and trim right spaces."
         }
       }
     }

@@ -14,15 +14,15 @@ I hope you will find it useful.
 
 Depending on how you configure it, this extension can do the following:
 
-    - Delete selected text
-    - Delete the word under the caret (if no text selected)
-        Delete line if the caret is placed at the end of the last character on the line
-    - Delete line if nothing is selected
-        Delete the line / Empty the line (Will leave the line, it will just be empty)
-    - Trim whitespace left
-        Leave one space (If there are multiple spaces, it will leave only one)
-    - Trim whitespace right
-        Leave one space (If there are multiple spaces, it will leave only one)
+- Delete selected text
+- Delete the word under the caret (if no text selected)
+  - Delete line if the caret is placed at the end of the last character on the line
+- Delete line if nothing is selected
+  - Delete the line / Empty the line (Will leave the line, it will just be empty)
+- Trim whitespace left
+  - Leave one space (If there are multiple spaces, it will leave only one)
+- Trim whitespace right
+  - Leave one space (If there are multiple spaces, it will leave only one)
 
 ## Extension Settings
 

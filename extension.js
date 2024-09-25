@@ -55,9 +55,9 @@ function activate(context) {
 					else if (deleteWordUnderTheCaret && trimRight) {
 
 						let currentRange = editor.document.getWordRangeAtPosition(selection.start);
-						let startPosition = new vscode.Position(currentRange.end.line, (currentRange.end.character));
-						let endPosition = new vscode.Position(currentRange.end.line, (currentRange.end.character + 1));
-						let nextCharacterRange = new vscode.Range(startPosition, endPosition);
+						let endPositionOfWord = new vscode.Position(currentRange.end.line, (currentRange.end.character));
+						let overStep = new vscode.Position(currentRange.end.line, (currentRange.end.character + 1));
+						let nextCharacterRange = new vscode.Range(endPositionOfWord, overStep);
 						let nextCharacter = editor.document.getText(nextCharacterRange);
 
 						let emptyLog = "";
@@ -65,28 +65,29 @@ function activate(context) {
 
 						while (nextCharacter === " ") {
 
-							let moveStartPositionByOne = new vscode.Range(endPosition,
-								new vscode.Position(currentRange.end.line, (currentRange.end.character + 1)));
+							let head = overStep.character;
 
-							startPosition = new vscode.Position(moveStartPositionByOne.end.line, (moveStartPositionByOne.end.character));
-							endPosition = new vscode.Position(moveStartPositionByOne.end.line, (moveStartPositionByOne.end.character) + 1);
+							endPositionOfWord = new vscode.Position(currentRange.end.line, head);
+							overStep = new vscode.Position(currentRange.end.line, head + 1);
 
-							const nextCharacterPosition = new vscode.Range(startPosition, endPosition);
+							head += 1;
 
-							nextCharacter = editor.document.getText(nextCharacterPosition);
+							nextCharacterRange = new vscode.Range(endPositionOfWord, overStep);
+
+							nextCharacter = editor.document.getText(nextCharacterRange);
 
 							numberOfSpaces++;
 						}
 
-						emptyLog = `Number of empty numberOfSpaces that will be deleted: ${numberOfSpaces}`;
-						console.log(emptyLog);
+						console.log(`Number of empty numberOfSpaces that will be deleted: ${numberOfSpaces}`);
 
 						let finalStartPosition = new vscode.Position(currentRange.end.line, (currentRange.start.character));
 
-						let leaveOneSpace = true;
+						let leaveOneSpace = false;
 						if (leaveOneSpace){
 							numberOfSpaces -= 1;
 						}
+						
 						let finalEndPosition = new vscode.Position(currentRange.end.line, (currentRange.end.character) + numberOfSpaces);
 
 						let deletionWithTrimRange = new vscode.Range(finalStartPosition, finalEndPosition);

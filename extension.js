@@ -57,9 +57,6 @@ function activate(context) {
 					}
 				})
 			})
-
-			console.log("End");
-			vscode.window.showInformationMessage("End");
 		}
 	});
 
@@ -70,21 +67,17 @@ function deleteText(editor, editBuilder, currentRange) {
 
 	let numberOfSpacesToTrimLeft = 0
 	if (TRIM_LEFT) {
-		console.log(`TRIM_LEFT = ${TRIM_LEFT}`)
 		numberOfSpacesToTrimLeft = getNumberOfSpacesToTrimLeft(editor, currentRange);
 	}
 
 	let numberOfSpacesToTrimRight = 0
 	if (TRIM_RIGHT) {
-		console.log(`TRIM_RIGHT = ${TRIM_RIGHT}`)
 		numberOfSpacesToTrimRight = getNumberOfSpacesToTrimRight(editor, currentRange);
 	}
 
 	let finalStartPosition = new vscode.Position(currentRange.start.line, currentRange.start.character - numberOfSpacesToTrimLeft);
 	let finalEndPosition = new vscode.Position(currentRange.end.line, currentRange.end.character + numberOfSpacesToTrimRight);
 	let deletionWithTrimRange = new vscode.Range(finalStartPosition, finalEndPosition);
-
-	console.log(`Deleted word under the caret. Text: (${editor.document.getText(deletionWithTrimRange)}) | Spaces trimmed left: ${numberOfSpacesToTrimLeft} | Spaces trimmed right: ${numberOfSpacesToTrimRight}`);
 
 	editBuilder.delete(deletionWithTrimRange);
 }
@@ -94,7 +87,6 @@ function deleteLine(editor, editBuilder, selection) {
 	let lineDeleteRange = editor.document.lineAt(selection.active.line).rangeIncludingLineBreak;
 
 	if (EMPTY_LINE) {
-		console.log(`EMPTY_LINE = ${EMPTY_LINE}`)
 		lineDeleteRange = editor.document.lineAt(selection.active.line).range;
 	}
 
@@ -105,14 +97,12 @@ function deleteLine(editor, editBuilder, selection) {
 function getNumberOfSpacesToTrimLeft(editor, currentRange) {
 
 	if (currentRange == undefined) {
-		console.log(`Undefined. Escaped`)
 		return;
 	}
 
 	let wordStart = new vscode.Position(currentRange.end.line, currentRange.start.character);
 
 	if (wordStart.character == 0) {
-		console.log(`Character was: ${wordStart.character}. Beginning of line. Escaped`)
 		return;
 	}
 
@@ -129,7 +119,6 @@ function getNumberOfSpacesToTrimLeft(editor, currentRange) {
 		let head = wordStart.character - 1;
 
 		if (head == 0) { // if head not zero
-			console.log(`Character was: ${head}. Escaped`)
 			break;
 		}
 
@@ -140,11 +129,8 @@ function getNumberOfSpacesToTrimLeft(editor, currentRange) {
 		previousCharacter = editor.document.getText(nextCharacterRange);
 	}
 
-	console.log(`Number left spaces that will be deleted before leaveOneSpace flag: ${numberOfSpaces}`);
-
 	if (TRIM_TO_ONE_SPACE_LEFT && numberOfSpaces > 0) {
 		numberOfSpaces -= 1;
-		console.log(`leaveOneSpace = ${TRIM_TO_ONE_SPACE_LEFT}. Final number of spaces that will be deleted: ${numberOfSpaces}`)
 	}
 
 	return numberOfSpaces;
@@ -178,7 +164,6 @@ function getNumberOfSpacesToTrimRight(editor, currentRange) {
 	console.log(`Number right spaces that will be deleted before leaveOneSpace flag: ${numberOfSpaces}`);
 
 	if (TRIM_TO_ONE_SPACE_RIGHT && numberOfSpaces > 0) {
-		console.log(`leaveOneSpace = ${TRIM_TO_ONE_SPACE_RIGHT}. Final number of spaces that will be deleted: ${numberOfSpaces}`)
 		numberOfSpaces -= 1;
 	}
 

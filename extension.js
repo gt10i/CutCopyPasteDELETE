@@ -41,14 +41,17 @@ function activate(context) {
 
 						console.log(`Deleted line: ${editor.document.getText(currentLineRange)}`);
 					}
-					else if (deleteWordUnderTheCaret){
+					// else if (deleteWordUnderTheCaret){
 
-						const word = editor.document.getWordRangeAtPosition(selection.start);
+					// 	const word = editor.document.getWordRangeAtPosition(selection.start);
 
-						editBuilder.delete(word);
+					// 	editBuilder.delete(word);
 
-						console.log(`Deleted: ${editor.document.getText(wordRange)}`);
-					}
+					// 	console.log(`Deleted: ${editor.document.getText(wordRange)}`);
+					// }
+					// else if (deleteWordUnderTheCaret && trimLeft) {
+					// 	// if leave one space, just -1 from the spaces range
+					// }
 					else if (deleteWordUnderTheCaret && trimRight) {
 
 						let currentRange = editor.document.getWordRangeAtPosition(selection.start);
@@ -58,14 +61,15 @@ function activate(context) {
 						let nextCharacter = editor.document.getText(nextCharacterRange);
 
 						let emptyLog = "";
-						let count = 0;
+						let numberOfSpaces = 0;
 
 						while (nextCharacter === " ") {
 
-							let nextRange = new vscode.Range(endPosition, new vscode.Position(currentRange.end.line, (currentRange.end.character + 1)));
+							let moveStartPositionByOne = new vscode.Range(endPosition,
+								new vscode.Position(currentRange.end.line, (currentRange.end.character + 1)));
 
-							startPosition = new vscode.Position(nextRange.end.line, (nextRange.end.character));
-							endPosition = new vscode.Position(nextRange.end.line, (nextRange.end.character) + 1);
+							startPosition = new vscode.Position(moveStartPositionByOne.end.line, (moveStartPositionByOne.end.character));
+							endPosition = new vscode.Position(moveStartPositionByOne.end.line, (moveStartPositionByOne.end.character) + 1);
 
 							const nextCharacterPosition = new vscode.Range(startPosition, endPosition);
 
@@ -78,6 +82,11 @@ function activate(context) {
 						console.log(emptyLog);
 
 						let finalStartPosition = new vscode.Position(currentRange.end.line, (currentRange.start.character));
+
+						let leaveOneSpace = true;
+						if (leaveOneSpace){
+							numberOfSpaces -= 1;
+						}
 						let finalEndPosition = new vscode.Position(currentRange.end.line, (currentRange.end.character) + numberOfSpaces);
 
 						let deletionWithTrimRange = new vscode.Range(finalStartPosition, finalEndPosition);
@@ -85,7 +94,6 @@ function activate(context) {
 						console.log(`Deleted: ${editor.document.getText(deletionWithTrimRange)} (${numberOfSpaces} spaces)`);
 
 						editBuilder.delete(deletionWithTrimRange);
-
 					}
 				})
 			})

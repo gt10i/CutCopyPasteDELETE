@@ -28,6 +28,13 @@ function activate(context) {
 					else if (DELETE_WORD_UNDER_THE_CARET) {
 
 						let currentRange = editor.document.getWordRangeAtPosition(selection.start);
+
+						if (currentRange == undefined && DELETE_LINE_ON_NO_SELECTION) {
+
+							deleteLine(editor, editBuilder, selection);
+							return;
+						}
+
 						deleteText(editor, editBuilder, currentRange);
 					}
 					else if (DELETE_LINE_ON_NO_SELECTION) {
@@ -49,13 +56,13 @@ function deleteText(editor, editBuilder, currentRange) {
 
 	let numberOfSpacesToTrimLeft = 0
 	if (TRIM_LEFT) {
-		console.log(`TrimLeft = ${TRIM_LEFT}`)
+		console.log(`TRIM_LEFT = ${TRIM_LEFT}`)
 		numberOfSpacesToTrimLeft = getNumberOfSpacesToTrimLeft(editor, currentRange);
 	}
 
 	let numberOfSpacesToTrimRight = 0
 	if (TRIM_RIGHT) {
-		console.log(`TrimRight = ${TRIM_RIGHT}`)
+		console.log(`TRIM_RIGHT = ${TRIM_RIGHT}`)
 		numberOfSpacesToTrimRight = getNumberOfSpacesToTrimRight(editor, currentRange);
 	}
 
@@ -73,6 +80,7 @@ function deleteLine(editor, editBuilder, selection) {
 	let lineDeleteRange = editor.document.lineAt(selection.active.line).rangeIncludingLineBreak;
 
 	if (EMPTY_LINE) {
+		console.log(`EMPTY_LINE = ${EMPTY_LINE}`)
 		lineDeleteRange = editor.document.lineAt(selection.active.line).range;
 	}
 
@@ -82,7 +90,7 @@ function deleteLine(editor, editBuilder, selection) {
 
 function getNumberOfSpacesToTrimLeft(editor, currentRange) {
 
-	if (currentRange == undefined){
+	if (currentRange == undefined) {
 		console.log(`Undefined. Escaped`)
 		return;
 	}

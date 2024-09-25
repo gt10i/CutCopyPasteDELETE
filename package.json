@@ -51,7 +51,7 @@
         },
         "cutcopypastedelete.deleteWordUnderTheCaret": {
           "type": "boolean",
-          "default": false,
+          "default": true,
           "description": "Delete the word the caret is pointing at."
         },
         "cutcopypastedelete.trimLeft": {

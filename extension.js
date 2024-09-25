@@ -38,6 +38,18 @@ function activate(context) {
 							return;
 						}
 
+						if (currentRange && DELETE_LINE_WHEN_CARET_AT_EOLC) {
+
+							var endOfLineCharacter = editor.document.lineAt(selection.active.line).range.end.character;
+							var caretPosition = selection.active.character;
+
+							if (endOfLineCharacter == caretPosition) {
+
+								deleteLine(editor, editBuilder, selection);
+								return;
+							}
+						}
+
 						deleteText(editor, editBuilder, currentRange);
 					}
 					else if (DELETE_LINE_IF_NO_SELECTION) {

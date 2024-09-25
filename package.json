@@ -1,6 +1,7 @@
 {
   "name": "cutcopypastedelete",
   "displayName": "CutCopyPasteDELETE",
+  "author": {"name": "WhiteCat Software"},
   "description": "Adds Delete to the right click context menu",
   "version": "0.0.1",
   "engines": {
@@ -14,20 +15,20 @@
   "contributes": {
     "commands": [
       {
-        "command": "cutcopypastedelete.helloWorld",
+        "command": "cutcopypastedelete.deleteEditorContextMenu",
         "title": "Delete"
       }
     ],
     "menus": {
       "commandPalette": [
         {
-          "command": "cutcopypastedelete.helloWorld",
+          "command": "cutcopypastedelete.deleteEditorContextMenu",
           "when": "editorHasSelection"
         }
       ],
       "editor/context": [
         {
-          "command": "cutcopypastedelete.helloWorld",
+          "command": "cutcopypastedelete.deleteEditorContextMenu",
           "group": "9_cutcopypaste@5"
         }
       ]

@@ -2,7 +2,8 @@
   "name": "cutcopypastedelete",
   "displayName": "CutCopyPasteDELETE",
   "author": {"name": "WhiteCat Software"},
-  "description": "Adds Delete to the right click context menu",
+  "publisher": "WhiteCat Software",
+  "description": "Adds Delete to the editor's right click context menu",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.88.1"
@@ -32,6 +33,16 @@
           "group": "9_cutcopypaste@5"
         }
       ]
+    },
+    "configuration": {
+      "title": "limess",
+      "properties": {
+        "cutcopypastedelete.deleteLineOnNoSeletion": {
+          "type": "boolean",
+          "default": false,
+          "description": "Delete the line if no text is selected."
+        }
+      }
     }
   },
   "scripts": {

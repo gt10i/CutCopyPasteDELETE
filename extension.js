@@ -10,6 +10,11 @@ function activate(context) {
 
 		const editor = vscode.window.activeTextEditor;
 
+		let config = vscode.workspace.getConfiguration('cutcopypastedelete');
+		let configg = config.get("deleteLineOnNoSeletion");
+		vscode.window.showInformationMessage(configg);
+
+
 		if (editor) {
 
 			// const selection = editor.selection;
@@ -29,19 +34,27 @@ function activate(context) {
 						console.log(selection);
 						editBuilder.delete(selection)
 					}
+					else if (configg) {
+
+						// const selectionRange = new vscode.Range(editor.selection.start.line, editor.selection.end.character);
+
+						const currentLineRange = editor.document.lineAt(selection.active.line).range;
+
+						editBuilder.delete(currentLineRange);
+					}
 				})
 			})
 
 			// delete line - Make this an option?
-			
+
 			console.log("End");
 			vscode.window.showInformationMessage("End");
 		}
 	});
 
-		// const selectionRange = new vscode.Range(selection.start, selection.end);
-		// const selectedText = editor.document.getText(selectionRange);
-		// console.log(selectedText);
+	// const selectionRange = new vscode.Range(selection.start, selection.end);
+	// const selectedText = editor.document.getText(selectionRange);
+	// console.log(selectedText);
 
 	// const document = editor.document;
 
@@ -52,7 +65,7 @@ function activate(context) {
 	// })
 
 
-context.subscriptions.push(disposable);
+	context.subscriptions.push(disposable);
 }
 
 function deactivate() { }

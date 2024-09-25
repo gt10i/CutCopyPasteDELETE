@@ -1,15 +1,16 @@
 {
   "name": "cutcopypastedelete",
-  "displayName": "CutCopyPaste DELETE",
+  "displayName": "CutCopyPasteDELETE",
   "icon": "images/icon.png",
   "homepage": "",
+  "repository": "https://github.com/gt10i/CutCopyPasteDELETE",
   "bugs": {},
   "author": {
     "name": "George",
     "email": "gt10i.dev@gmail.com"
   },
   "publisher": "WhiteCat Software",
-  "description": "Adds \"Delete\" to the editor's right click context menu",
+  "description": "Adds Delete command to the editor's right click context menu",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.88.1"
@@ -41,18 +42,18 @@
       ]
     },
     "configuration": {
-      "title": "CutCopyPaste DELETE",
+      "title": "CutCopyPasteDELETE",
       "properties": {
         "cutCopyPasteDelete.deleteWordUnderTheCaret.enabled": {
           "order": 0,
           "type": "boolean",
-          "default": true,
+          "default": false,
           "description": "When enabled deletes word under the caret"
         },
         "cutCopyPasteDelete.deleteWordUnderTheCaret.deleteLineWhenCaretAtEndOfLineCharacter.enabled": {
           "order": 1,
           "type": "boolean",
-          "default": true,
+          "default": false,
           "description": "When enabled deletes the whole line instead of the word when the caret is at the last character of the current line. REQUIRES \"Delete Word Under The Caret\" to be enabled"
         },
         "cutCopyPasteDelete.deleteLineIfNoSeletion.enabled": {

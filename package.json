@@ -1,14 +1,14 @@
 {
   "name": "cutcopypastedelete",
-  "displayName": "Cut Copy Paste DELETE",
-  "icon": "",
+  "displayName": "CutCopyPaste DELETE",
+  "icon": "images/icon.png",
   "homepage": "",
   "bugs": {},
   "author": {
-    "name": "George T"
+    "name": "George"
   },
   "publisher": "WhiteCat Software",
-  "description": "Adds Delete to the editor's right click context menu",
+  "description": "Adds \"Delete\" to the editor's right click context menu",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.88.1"

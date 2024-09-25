@@ -44,17 +44,6 @@ function activate(context) {
 
 						editBuilder.delete(deletionWithTrimRange);
 					}
-					else if (deleteLine) {
-
-						let lineDeleteRange = editor.document.lineAt(selection.active.line).rangeIncludingLineBreak;
-
-						if (emptyLine) {
-							lineDeleteRange = editor.document.lineAt(selection.active.line).range;
-						}
-
-						editBuilder.delete(lineDeleteRange);
-						console.log(`Deleted line: ${editor.document.getText(lineDeleteRange)}`);
-					}
 					else if (deleteWordUnderTheCaret) {
 
 						let currentRange = editor.document.getWordRangeAtPosition(selection.start);
@@ -78,6 +67,17 @@ function activate(context) {
 						console.log(`Deleted word under the caret. Text: (${editor.document.getText(deletionWithTrimRange)}) | Spaces trimmed left: ${numberOfSpacesToTrimLeft} | Spaces trimmed right: ${numberOfSpacesToTrimRight}`);
 
 						editBuilder.delete(deletionWithTrimRange);
+					}
+					else if (deleteLine) {
+
+						let lineDeleteRange = editor.document.lineAt(selection.active.line).rangeIncludingLineBreak;
+
+						if (emptyLine) {
+							lineDeleteRange = editor.document.lineAt(selection.active.line).range;
+						}
+
+						editBuilder.delete(lineDeleteRange);
+						console.log(`Deleted line: ${editor.document.getText(lineDeleteRange)}`);
 					}
 				})
 			})
